@@ -1,0 +1,209 @@
+import React, { useState } from 'react';
+
+const Testimonial = () => {
+  const [testimonials, setTestimonials] = useState([
+    { src: '/review/review_1.png', alt: 'Testimonial 1', description: 'Testimonial from Parent A', date: '2024-08-15' },
+    { src: '/review/review_2.png', alt: 'Testimonial 2', description: 'Testimonial from Parent B', date: '2024-08-14' },
+    { src: '/review/review_3.png', alt: 'Testimonial 3', description: 'Testimonial from Parent C', date: '2024-08-13' },
+    { src: '/review/review_4.png', alt: 'Testimonial 4', description: 'Testimonial from Parent D', date: '2024-08-12' },
+    { src: '/review/review_5.png', alt: 'Testimonial 5', description: 'Testimonial from Parent E', date: '2024-08-11' },
+    { src: '/review/review_6.png', alt: 'Testimonial 6', description: 'Testimonial from Parent F', date: '2024-08-10' },
+  ]);
+
+  const [form, setForm] = useState({
+    name: '',
+    relationship: 'Parent', // Default to a valid choice
+    picture: null,
+    rating: 5,
+    text: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, files } = e.target;
+    if (type === 'file') {
+      setForm({ ...form, picture: files[0] });
+    } else {
+      setForm({ ...form, [name]: value });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const currentDate = new Date().toISOString().split('T')[0]; // Current date in YYYY-MM-DD format
+    console.log('Form data:', form);
+
+    setTestimonials([...testimonials, {
+      src: form.picture ? URL.createObjectURL(form.picture) : '/marz_logo_1.png',
+      alt: `Testimonial from ${form.name}`,
+      name: form.name,
+      relationship: form.relationship,
+      rating: form.rating,
+      text: form.text,
+      date: currentDate
+    }]);
+
+    setForm({
+      name: '',
+      relationship: 'Parent',
+      picture: null,
+      rating: 5,
+      text: ''
+    });
+  };
+
+  const timeAgo = (date) => {
+    const now = new Date();
+    const diffInMs = now - new Date(date);
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+    return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+  };
+
+  return (
+    <div className="bg-gray-100 min-h-screen py-10 mt-20 container">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white shadow-md rounded-lg p-6">
+          <h1 className="text-3xl font-bold text-center text-blue-800 mb-6">Testimonials</h1>
+
+          <div className="text-center mb-8">
+            <p className="text-lg text-gray-700">
+              Here are some testimonials from parents who have experienced the impact of Marzwell.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {testimonials.slice(0, 6).map((testimonial, index) => (
+              <div key={index} className="relative bg-cyan-200 rounded-lg shadow-lg overflow-hidden p-4">
+                <div className="flex items-center justify-center overflow-hidden mb-4">
+                  <img
+                    src={testimonial.src}
+                    alt={testimonial.alt}
+                    className="w-full h-auto rounded-md"
+                  />
+                </div>
+                <div className="text-center">
+                  <p className="text-gray-600">{testimonial.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-12">
+            {testimonials.slice(6).map((testimonial, index) => (
+              <div key={index} className="relative bg-cyan-200 rounded-lg shadow-lg overflow-hidden p-4 flex items-start">
+                <div className="w-16 h-16 mr-4 flex-shrink-0">
+                  <img
+                    src={testimonial.src}
+                    alt={testimonial.alt}
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
+                <div className="flex-1">
+                  <h2 className="text-lg font-semibold">{testimonial.name}</h2>
+                  <p className="text-gray-700 mb-1">{testimonial.relationship}</p>
+                  <div className="flex items-center mb-2">
+                    {[...Array(5)].map((_, i) => (
+                      <svg
+                        key={i}
+                        className={`w-5 h-5 ${i < testimonial.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                    ))}
+                  </div>
+                  <p className="text-gray-600">{testimonial.text}</p>
+                  <p className="text-gray-500 text-sm mt-2">{timeAgo(testimonial.date)}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-12 bg-white shadow-md rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-blue-800 mb-4">Add Testimonial</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-4">
+              <label htmlFor="name" className="block text-gray-700">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-md"
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="relationship" className="block text-gray-700">Relationship</label>
+              <select
+                id="relationship"
+                name="relationship"
+                value={form.relationship}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-md"
+              >
+                <option value="Parent">Parent</option>
+                <option value="Teacher">Teacher</option>
+                <option value="Alumni">Alumni</option>
+                <option value="Teacher">Guardian</option>
+                <option value="Pupil">Pupil</option>
+                <option value="Others">Others</option>
+                {/* Add other choices as needed */}
+              </select>
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="picture" className="block text-gray-700">Picture</label>
+              <input
+                type="file"
+                id="picture"
+                name="picture"
+                accept="image/*"
+                onChange={handleChange}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md"
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="rating" className="block text-gray-700">Rating</label>
+              <select
+                id="rating"
+                name="rating"
+                value={form.rating}
+                onChange={handleChange}
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-md"
+              >
+                {[1, 2, 3, 4, 5].map((rating) => (
+                  <option key={rating} value={rating}>{rating}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="text" className="block text-gray-700">Testimonial</label>
+              <textarea
+                id="text"
+                name="text"
+                value={form.text}
+                onChange={handleChange}
+                rows="4"
+                required
+                className="w-full px-4 py-2 border border-gray-300 rounded-md"
+              />
+            </div>
+
+            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Testimonial;

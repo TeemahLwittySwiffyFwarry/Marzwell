@@ -1,0 +1,121 @@
+/* HeroSection.css */
+.typewriter {
+    display: inline-block;
+    overflow: hidden;
+    white-space: normal; /* Allow text to wrap onto multiple lines */
+    line-height: 1.5; /* Adjust line height for readability */
+    border-right: 2px solid #ffffff; /* Customize the cursor color */
+    animation: typing 4s steps(30, end), blink-caret 0.75s step-end infinite;
+  }
+  
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; } /* Adjust this to control the typing animation width */
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #ffffff; }
+  }
+  
+
+ /* Custom scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px; /* Wider scrollbar for better usability */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light background for the scrollbar track */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888; /* Darker color for the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover */
+}
+
+/* Optional: Add smooth scrolling */
+.custom-scrollbar {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px; /* Wider scrollbar for better usability */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light background for the scrollbar track */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888; /* Darker color for the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover */
+}
+
+/* hero.css */
+
+/* Table scrolling container */
+.table-scroll-container {
+  position: relative;
+  height: 30rem; /* Fixed height */
+  overflow-x: auto; /* Allow horizontal scrolling */
+  overflow-y: hidden; /* Hide vertical scrollbar */
+}
+
+/* Ensure table takes full width and prevents text wrapping */
+.table-scroll-content {
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.table-scroll-content table {
+  min-width: 100%; /* Ensure the table takes full width */
+  border-collapse: collapse;
+}
+
+/* Table styling */
+.table-scroll-content th, .table-scroll-content td {
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+}
+
+/* Sticky table header */
+.table-scroll-content thead {
+  position: sticky;
+  top: 0;
+  background: #f8f9fa; /* Adjust background color for better visibility */
+  z-index: 1;
+}
+
+/* Custom scrollbar styles */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 12px; /* Wider scrollbar for better usability */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light background for the scrollbar track */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #888; /* Darker color for the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover */
+}
+
+/* Optional: Add smooth scrolling */
+.custom-scrollbar {
+  scroll-behavior: smooth;
+}

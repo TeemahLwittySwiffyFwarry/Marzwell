@@ -1,0 +1,67 @@
+.popup-notification {
+  position: fixed;
+  bottom: 20px; /* Distance from the bottom of the viewport */
+  right: 20px; /* Distance from the right side of the viewport */
+  background-color: #eca8a8; /* Red background */
+  color: rgb(18, 184, 239);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Ensures the popup appears above other content */
+  transition: opacity 0.5s ease;
+  }
+  
+  
+  .popup-notification img {
+    height: 200px;
+    width: 200px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  
+  .popup-notification p {
+    margin: 0;
+    font-size: 12px;
+  }
+ 
+  
+  .popup-notification2 {
+    position: fixed;
+    left: 20px;
+    bottom: 20%; /* Adjust as needed to control the vertical position */
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1000;
+    width: 300px; /* Adjust width as needed */
+    margin-left: 10px; /* Add margin to avoid sticking to the screen edge */
+  }
+  
+  .popup-image2 {
+    width: 100%; /* Ensure image covers the card width */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px;
+    margin-bottom: 10px; /* Space between image and text */
+  }
+  
+  .popup-notification2 p {
+    margin: 0 0 10px; /* Space between text and button */
+  }
+  
+
+  
+  button.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  button.close-btn:hover {
+    color: red;
+  }
