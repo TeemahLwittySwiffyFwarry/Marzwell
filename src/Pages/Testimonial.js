@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import StarRatings from 'react-star-ratings';
+import Avatar from 'react-avatar';
+import { default as EmojiPicker } from 'emoji-picker-react'; // Use default export
+import Swal from 'sweetalert2'; // Import SweetAlert
 
 const Testimonial = () => {
   const [testimonials, setTestimonials] = useState([]);
@@ -9,11 +12,14 @@ const Testimonial = () => {
     relationship: '',
     picture: null,
     text: '',
-    rating: 0
+    rating: 5,
+    showEmojiPicker: false, // Added state for showing the emoji picker
   });
+  const [expandedTestimonialIndex, setExpandedTestimonialIndex] = useState(null);
+  const cardRef = useRef(null);
 
   useEffect(() => {
-    axios.get('http://127.0.0.1:8000/api/testimonial/')
+    axios.get('https://teemahlwitty.pythonanywhere.com/api/testimonial/')
       .then(response => {
         setTestimonials(response.data);
       })
@@ -45,20 +51,34 @@ const Testimonial = () => {
     if (form.picture) {
       formData.append('image', form.picture);
     }
+    // Add current date
+    formData.append('date_created', new Date().toISOString());
 
-    axios.post('http://127.0.0.1:8000/api/testimonial/', formData, {
+    axios.post('https://teemahlwitty.pythonanywhere.com/api/testimonial/', formData, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }
     })
       .then(response => {
+        // Add new testimonial to the list
         setTestimonials([...testimonials, response.data]);
+
+        // Reset the form
         setForm({
           name: '',
           relationship: '',
           picture: null,
           text: '',
-          rating: 0
+          rating: 5,
+          showEmojiPicker: false,
+        });
+
+        // Show SweetAlert success message
+        Swal.fire({
+          icon: 'success',
+          title: 'Testimonial Sent!',
+          text: 'Your testimonial has been successfully submitted for approval.',
+          confirmButtonText: 'OK',
         });
       })
       .catch(error => {
@@ -70,9 +90,45 @@ const Testimonial = () => {
     const now = new Date();
     const date = new Date(dateString);
     const diffTime = Math.abs(now - date);
+
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    return `${diffDays} day${diffDays === 1 ? '' : 's'} ago`;
+    const diffMonths = Math.floor(diffDays / 30);
+    const diffYears = Math.floor(diffMonths / 12);
+
+    if (diffYears > 0) {
+      return `${diffYears} year${diffYears === 1 ? '' : 's'} ago`;
+    } else if (diffMonths > 0) {
+      return `${diffMonths} month${diffMonths === 1 ? '' : 's'} ago`;
+    } else {
+      return `${diffDays} day${diffDays === 1 ? '' : 's'} ago`;
+    }
   };
+
+  const handleEmojiClick = (emoji) => {
+    setForm({
+      ...form,
+      text: form.text + emoji.emoji,
+      showEmojiPicker: false
+    });
+  };
+
+  const handleClickOutside = (event) => {
+    if (cardRef.current && !cardRef.current.contains(event.target)) {
+      setExpandedTestimonialIndex(null);
+    }
+  };
+
+  useEffect(() => {
+    if (expandedTestimonialIndex !== null) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [expandedTestimonialIndex]);
 
   return (
     <div className="bg-gray-100 min-h-screen py-10 mt-20 container">
@@ -86,84 +142,68 @@ const Testimonial = () => {
             </p>
           </div>
 
-          {/* Hard-coded cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-            <div className="shadow-lg overflow-hidden bg-cyan-200 rounded-md">
-              <img
-                src="/review/review_1.png"
-                alt="Testimonial Image 1"
-                className=" mt-8 mb-8 border-1 border-cyan-200 shadow-lg"
-              />
-            </div>
-            <div className="shadow-lg overflow-hidden bg-cyan-200 rounded-md">
-              <img
-                src="/review/review_2.png"
-                alt="Testimonial Image 1"
-                className=" mt-8 mb-8 border-1 border-cyan-200 shadow-lg"
-              />
-            </div>
-            <div className="shadow-lg overflow-hidden bg-cyan-200 rounded-md">
-              <img
-                src="/review/review_3.png"
-                alt="Testimonial Image 1"
-                className=" mt-8 mb-8 border-1 border-cyan-200 shadow-lg"
-              />
-            </div>
-            <div className="shadow-lg overflow-hidden bg-cyan-200 rounded-md">
-              <img
-                src="/review/review_4.png"
-                alt="Testimonial Image 1"
-                className=" mt-8 mb-8 border-1 border-cyan-200 shadow-lg"
-              />
-            </div>
-            <div className="shadow-lg overflow-hidden bg-cyan-200 rounded-md">
-              <img
-                src="/review/review_5.png"
-                alt="Testimonial Image 5"
-                className=" mt-8 mb-8 border-1 border-cyan-200 shadow-lg"
-              />
-            </div>
-            <div className="shadow-lg overflow-hidden bg-cyan-200 rounded-md">
-              <img
-                src="/review/review_6.png"
-                alt="Testimonial Image 1"
-                className=" mt-8 mb-8 border-1 border-cyan-200 shadow-lg"
-              />
-            </div>
-            
-          </div>
-
           {/* Dynamic Testimonials */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="relative bg-cyan-200 rounded-lg shadow-lg overflow-hidden p-6 flex flex-col items-start">
-                <div className="absolute top-4 left-4">
-                  <img
-                    src={testimonial.image ? `${testimonial.image}` : '/marz_logo_1.png'}
-                    alt={testimonial.name}
-                    className="w-16 h-16 rounded-full border-4 border-white shadow-lg"
-                  />
-                </div>
-                <div className="ml-20">
-                  <h2 className="text-xl font-semibold text-blue-800 mb-2">{testimonial.name}</h2>
-                  <p className="text-gray-500 mb-1">{testimonial.relationship_to_school}</p>
-                  <div className="mb-2">
-                    <StarRatings
-                      rating={testimonial.rating}
-                      starRatedColor="gold"
-                      numberOfStars={5}
-                      name='rating'
-                      starDimension="20px"
-                      starSpacing="2px"
-                    />
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8 text-justify">
+            {testimonials
+              .filter(testimonial => testimonial.approval === 'Approved') // Filter out unapproved testimonials
+              .map((testimonial, index) => {
+                const isExpanded = index === expandedTestimonialIndex;
+                const textToShow = isExpanded ? testimonial.testimonial : `${testimonial.testimonial.substring(0, 200)}...`;
+
+                return (
+                  <div
+                    key={index}
+                    ref={isExpanded ? cardRef : null}
+                    className="relative bg-cyan-200 rounded-lg shadow-lg overflow-hidden p-6 flex flex-col items-start"
+                  >
+                    <div className="absolute top-4 left-4">
+                      {testimonial.image ? (
+                        <img
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          className="w-16 h-16 rounded-full shadow-lg"
+                        />
+                      ) : (
+                        <Avatar
+                          name={testimonial.name}
+                          size="64"
+                          round={true}
+                          className=""
+                        />
+                      )}
+                    </div>
+                    <div className="ml-20">
+                      <h2 className="text-xl font-semibold text-blue-800 mb-2">{testimonial.name}</h2>
+                      <p className="text-gray-500 mb-1">{testimonial.relationship_to_school}</p>
+                      <div className="mb-2">
+                        <StarRatings
+                          rating={testimonial.rating}
+                          starRatedColor="gold"
+                          numberOfStars={5}
+                          name="rating"
+                          starDimension="20px"
+                          starSpacing="2px"
+                        />
+                      </div>
+                      <p className="text-gray-600 mb-2" style={{ maxHeight: '500px', overflow: 'hidden' }}>
+                        {textToShow}
+                      </p>
+                      {textToShow !== testimonial.testimonial && (
+                        <button
+                          onClick={() => setExpandedTestimonialIndex(isExpanded ? null : index)}
+                          className="text-blue-500 hover:underline mt-2"
+                        >
+                          {isExpanded ? 'See Less' : 'See More'}
+                        </button>
+                      )}
+                      <p className="text-gray-400 text-sm">{formatDate(testimonial.date_created)}</p>
+                    </div>
                   </div>
-                  <p className="text-gray-600 mb-2">{testimonial.testimonial}</p>
-                  <p className="text-gray-400 text-sm">{formatDate(testimonial.date_created)}</p>
-                </div>
-              </div>
-            ))}
+                );
+              })}
           </div>
 
+          {/* Form to submit testimonial */}
           <div className="mt-12 bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-bold text-blue-800 mb-4">Add Your Testimonial</h2>
             <form onSubmit={handleSubmit}>
@@ -192,38 +232,24 @@ const Testimonial = () => {
                   >
                     <option value="" disabled>Select your relationship</option>
                     <option value="Parent">Parent</option>
-                    <option value="Guardian">Guardian</option>
                     <option value="Teacher">Teacher</option>
+                    <option value="Guardian">Guardian</option>
+                    <option value="Pupils">Pupils</option>
                     <option value="Alumni">Alumni</option>
-                    <option value="Other">Other</option>
+                    <option value="Others">Others</option>
                   </select>
                 </div>
               </div>
-
               <div className="mb-4">
-                <label htmlFor="rating" className="block text-gray-700">Rating</label>
-                <StarRatings
-                  rating={form.rating}
-                  starRatedColor="gold"
-                  changeRating={handleRatingChange}
-                  numberOfStars={5}
-                  name='rating'
-                  starDimension="30px"
-                  starSpacing="5px"
-                />
-              </div>
-
-              <div className="mb-4">
-                <label htmlFor="picture" className="block text-gray-700">Upload Picture (Optional)</label>
+                <label htmlFor="picture" className="block text-gray-700">Upload Picture</label>
                 <input
                   type="file"
                   id="picture"
                   name="picture"
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md"
+                  className="w-full border border-gray-300 rounded-md"
                 />
               </div>
-
               <div className="mb-4">
                 <label htmlFor="text" className="block text-gray-700">Testimonial</label>
                 <textarea
@@ -231,20 +257,41 @@ const Testimonial = () => {
                   name="text"
                   value={form.text}
                   onChange={handleChange}
-                  required
                   rows="4"
+                  required
                   className="w-full px-4 py-2 border border-gray-300 rounded-md"
-                ></textarea>
-              </div>
-
-              <div className="text-center">
+                />
                 <button
-                  type="submit"
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+                  type="button"
+                  onClick={() => setForm({ ...form, showEmojiPicker: !form.showEmojiPicker })}
+                  className="mt-2 text-gray-600"
                 >
-                  Submit Testimonial
+                  {form.showEmojiPicker ? 'Close Emoji Picker' : 'Add Emoji'}
                 </button>
+                {form.showEmojiPicker && (
+                  <div className="mt-2">
+                    <EmojiPicker onEmojiClick={handleEmojiClick} />
+                  </div>
+                )}
               </div>
+              <div className="mb-4">
+                <label className="block text-gray-700">Rating</label>
+                <StarRatings
+                  rating={form.rating}
+                  starRatedColor="gold"
+                  changeRating={handleRatingChange}
+                  numberOfStars={5}
+                  name="rating"
+                  starDimension="30px"
+                  starSpacing="2px"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full py-2 px-4 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              >
+                Submit Testimonial
+              </button>
             </form>
           </div>
         </div>

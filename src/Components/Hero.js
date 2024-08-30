@@ -13,7 +13,7 @@ const HeroSection = ({ isOpen }) => {
     // Fetch the enquiry data from the backend API
     const fetchEnquiries = async () => {
       try {
-        const response = await axios.get('http://127.0.0.1:8000/api/pupils/');
+        const response = await axios.get('https://teemahlwitty.pythonanywhere.com/api/pupils/');
         setEnquiries(response.data);
       } catch (error) {
         console.error('Error fetching enquiries:', error);
@@ -54,7 +54,7 @@ const HeroSection = ({ isOpen }) => {
   return (
     <section
       className="relative text-white text-center py-20 bg-cover bg-center mt-5"
-      style={{ backgroundImage: 'url(/heropage1.jpg)' }}
+      style={{ backgroundImage: 'url(/banner.jpg)' }}
     >
       <Popup
         message="Admission is ongoing now!"
@@ -139,7 +139,7 @@ const HeroSection = ({ isOpen }) => {
                           <tr key={index + reversedEnquiries.length} className="hover:bg-gray-50 transition-colors duration-300">
                             <td className="px-4 py-4 text-sm text-gray-600">{index + 1 + reversedEnquiries.length}</td>
                             <td className="px-4 py-4 text-sm text-gray-800">{item.pupil_name}</td>
-                            <td className="px-4 py-4 text-sm text-gray-600">{item.grade}</td>
+                            
                             <td className="px-4 py-4 text-sm text-gray-600">{item.status}</td>
                           </tr>
                         ))}

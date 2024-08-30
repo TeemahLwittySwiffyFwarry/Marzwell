@@ -6,11 +6,11 @@ import axios from 'axios';
 import PopupReview from '../Components/PopupReview';
 
 const ContactPage = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   const onSubmit = (data) => {
     // Handle form submission with Axios
-    axios.post('http://127.0.0.1:8000/api/contactmessages/', data)
+    axios.post('https://teemahlwitty.pythonanywhere.com/api/contactmessages/', data)
       .then(response => {
         console.log(response.data);
         // Display SweetAlert on successful submission
@@ -19,9 +19,10 @@ const ContactPage = () => {
           title: 'Message Sent',
           text: 'Message sent successfully!',
         });
+        // Clear the form fields
+        reset();
       })
       .catch(error => {
-        
         console.error('There was an error sending the message!', error);
         Swal.fire({
           icon: 'error',
@@ -29,7 +30,6 @@ const ContactPage = () => {
           text: 'Something went wrong!',
         });
       });
-      
   };
 
   return (

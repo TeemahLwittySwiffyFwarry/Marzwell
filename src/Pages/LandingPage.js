@@ -13,7 +13,7 @@ const LandingPage = () => {
         message="Check out our latest reviews!" 
         showDuration={3000} 
         
-        linkTo="/testimonial" 
+        linkTo="/testimonials" 
       />
       </div>
       
@@ -38,7 +38,7 @@ const LandingPage = () => {
       <div className="bg-white shadow-lg rounded-lg p-6">
         <img
           className="w-full h-48 object-cover rounded-md mb-4"
-          src="feature2.jpg" // Replace with your image path
+          src="career.jpg" // Replace with your image path
           alt="Modern Facilities"
         />
         <h3 className="text-2xl font-bold mb-4">Co-corricular(Career Day)</h3>
@@ -67,16 +67,16 @@ const LandingPage = () => {
       <div className="bg-white shadow-lg rounded-lg p-6">
         <img
           className="w-full h-48 object-cover rounded-md mb-4"
-          src="feature5.png" // Replace with your image path
+          src="recorder.jpg" // Replace with your image path
           alt="Modern Facilities"
         />
-        <h3 className="text-2xl font-bold mb-4">Quiz Activities</h3>
+        <h3 className="text-2xl font-bold mb-4">The Music Show</h3>
         <p>Our school is equipped with state-of-the-art facilities.</p>
       </div>
       <div className="bg-white shadow-lg rounded-lg p-6">
         <img
           className="w-full h-48 object-cover rounded-md mb-4"
-          src="feature6.png" // Replace with your image path
+          src="sport.jpg" // Replace with your image path
           alt="Holistic Education"
         />
         <h3 className="text-2xl font-bold mb-4">Sporting Activities</h3>
