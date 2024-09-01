@@ -58,7 +58,7 @@ const Footer = () => {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
-            <img className="h-16 w-auto flex-shrink-0" src="./marz_logo_3.png" alt="Responsive Logo" />
+            <img className="h-16 w-auto flex-shrink-0" src="./logos/marz_logo_3.png" alt="Responsive Logo" />
           </div>
 
           <div className="flex flex-col md:flex-row mb-4 md:mb-0">
@@ -103,7 +103,7 @@ const Footer = () => {
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-cyan-200 bg-opacity-50">
           <div className="bg-cyan-200 p-8 rounded-lg shadow-xl max-w-md w-full">
-            <img src="/marz_logo_3.png" className="" alt="" />
+            <img src="/logos/marz_logo_3.png" className="" alt="" />
             
             <form onSubmit={handleLogin}>
               <div className="mb-4">

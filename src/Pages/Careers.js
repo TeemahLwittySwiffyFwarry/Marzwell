@@ -15,7 +15,7 @@ const Careers = () => {
           {/* Advertisement Image */}
           <div className="flex justify-center mb-8">
             <img
-              src="recruit.png" // Replace with the path to your advertisement image
+              src="others/recruit.png" // Replace with the path to your advertisement image
               alt="Job Advertisement"
               className="max-w-full h-auto rounded-md shadow-lg"
             />

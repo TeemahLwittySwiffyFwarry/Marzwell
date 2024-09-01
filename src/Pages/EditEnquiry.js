@@ -182,8 +182,10 @@ const EditEnquiry = () => {
                 required
               >
                 <option value="" disabled>Select Status</option>
-                <option value="admitted">Admitted</option>
-                <option value="pending">Pending</option>
+                <option value="Processing">Processing</option>
+                <option value="Contacted">Contacted</option>
+                <option value="Awaiting Exam">Awaiting Exam</option>
+                <option value="Admitted">Admitted</option>
               </select>
             </div>
           </div>

@@ -26,27 +26,29 @@ const HeroSection = ({ isOpen }) => {
   useEffect(() => {
     const container = scrollContainerRef.current;
     const content = contentRef.current;
-
+  
     if (container && content) {
       const containerHeight = container.clientHeight;
       const contentHeight = content.scrollHeight;
-
+  
       let scrollPosition = 0;
-      const scrollSpeed = 0.2; // Adjust the scrolling speed
-
+      const scrollSpeed = 0.5; // Adjust the scrolling speed
+  
       const scroll = () => {
         scrollPosition += scrollSpeed;
-        if (scrollPosition > contentHeight) {
-          scrollPosition = 0;
+        if (scrollPosition >= contentHeight) {
+          // Reset scroll position to create a continuous loop without a noticeable stop
+          scrollPosition = -containerHeight;
         }
         container.scrollTop = scrollPosition;
       };
-
+  
       const interval = setInterval(scroll, 30); // Adjust the interval for smoothness
-
+  
       return () => clearInterval(interval); // Clean up interval on component unmount
     }
   }, [enquiries]);
+  
 
   // Reverse the enquiries array to show latest entries first
   const reversedEnquiries = [...enquiries].reverse();
@@ -54,7 +56,7 @@ const HeroSection = ({ isOpen }) => {
   return (
     <section
       className="relative text-white text-center py-20 bg-cover bg-center mt-5"
-      style={{ backgroundImage: 'url(/banner.jpg)' }}
+      style={{ backgroundImage: 'url(./others/banner.jpg)' }}
     >
       <Popup
         message="Admission is ongoing now!"
@@ -71,7 +73,7 @@ const HeroSection = ({ isOpen }) => {
               <div className="bg-white text-gray-800 rounded-lg shadow-2xl p-6 transform transition-transform duration-300 hover:scale-105">
                 <img
                   className="w-full h-32 object-cover rounded-md mb-4"
-                  src="/summer.jpg"
+                  src="./others/summer.jpg"
                   alt="Marzwell Summer Activity"
                 />
                 <h2 className="text-2xl font-bold mb-4">Summer Activity Ongoing</h2>
@@ -103,52 +105,49 @@ const HeroSection = ({ isOpen }) => {
 
             {/* Right Section - Waiting List */}
             <div className="md:col-span-3">
-              <div className="bg-white text-gray-800 rounded-lg shadow-2xl p-6 overflow-hidden">
-                <h2 className="text-2xl font-bold mb-4">Enquiries Waiting List</h2>
-                <div
-                  ref={scrollContainerRef}
-                  className="relative"
-                  style={{ height: '30rem', overflow: 'hidden' }} // Fixed height
-                >
-                  <div ref={contentRef} className="absolute top-0 left-0 w-full">
-                    <table className="min-w-full divide-y divide-gray-200 table-scroll-container overflow-x-auto overflow-x-scroll">
-                      <thead className="bg-gray-100 text-gray-700 sticky top-0 z-10">
-                        <tr>
-                          <th className="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider">S/N</th>
-                          <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Name</th>
-                          {/* <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Class</th> */}
-                          <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Status</th>
-                        </tr>
-                      </thead>
-                      <tbody className="bg-white divide-y divide-gray-200">
-                        {reversedEnquiries.map((item, index) => (
-                          <tr key={index} className="hover:bg-gray-50 transition-colors duration-300">
-                            <td className="px-4 py-4 text-sm text-gray-600">{index + 1}</td>
-                            <td className="px-4 py-4 text-sm text-gray-800">{item.pupil_name}</td>
-                            {/* <td className="px-4 py-4 text-sm text-gray-600">{item.grade}</td> */}
-                            <td className="px-4 py-4 text-sm text-gray-600">{item.status}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                    {/* Duplicate Table for Continuous Scroll */}
-                    <table className="min-w-full divide-y divide-gray-200" style={{ marginTop: '1rem' }}>
-                      
-                      <tbody className="bg-white divide-y divide-gray-200">
-                        {reversedEnquiries.map((item, index) => (
-                          <tr key={index + reversedEnquiries.length} className="hover:bg-gray-50 transition-colors duration-300">
-                            <td className="px-4 py-4 text-sm text-gray-600">{index + 1 + reversedEnquiries.length}</td>
-                            <td className="px-4 py-4 text-sm text-gray-800">{item.pupil_name}</td>
-                            
-                            <td className="px-4 py-4 text-sm text-gray-600">{item.status}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
+  <div className="bg-white text-gray-800 rounded-lg shadow-2xl p-6 overflow-hidden">
+    <h2 className="text-2xl font-bold mb-4">Enrollment Prgress Tracker</h2>
+    <div
+      ref={scrollContainerRef}
+      className="relative"
+      style={{ height: '30rem', overflow: 'hidden' }} // Fixed height
+    >
+      <div ref={contentRef} className="absolute top-0 left-0 w-full">
+        <table className="min-w-full divide-y divide-gray-200 table-scroll-container overflow-x-auto">
+          <thead className="bg-gray-100 text-gray-700 sticky top-0 z-10">
+            <tr>
+              <th className="px-2 py-3 text-left text-xs font-medium uppercase tracking-wider">S/N</th>
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Name</th>
+              <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Status</th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {reversedEnquiries.map((item, index) => (
+              <tr key={index} className="hover:bg-gray-50 transition-colors duration-300">
+                <td className="px-4 py-4 text-sm text-gray-600">{index + 1}</td>
+                <td className="px-4 py-4 text-sm text-gray-800">{item.pupil_name}</td>
+                <td className="px-4 py-4 text-sm text-gray-600">{item.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {/* Duplicate Table for Continuous Scroll */}
+        <table className="min-w-full divide-y divide-gray-200 mt-2">
+          <tbody className="bg-white divide-y divide-gray-200">
+            {reversedEnquiries.map((item, index) => (
+              <tr key={index} className="hover:bg-gray-50 transition-colors duration-300">
+                <td className="px-4 py-4 text-sm text-gray-600">{index + 1}</td>
+                <td className="px-4 py-4 text-sm text-gray-800">{item.pupil_name}</td>
+                <td className="px-4 py-4 text-sm text-gray-600">{item.status}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
           </div>
         </div>
       </div>

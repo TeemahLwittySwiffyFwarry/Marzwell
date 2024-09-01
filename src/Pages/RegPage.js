@@ -75,7 +75,7 @@ const RegistrationPage = () => {
         />
       </div>
       <img
-        src="heropage1.jpg"
+        src="./others/banner2.jpg"
         alt="Background"
         className="absolute inset-0 object-cover w-full h-full opacity-30"
       />
@@ -140,15 +140,15 @@ const RegistrationPage = () => {
                 required
               >
                 <option value="" disabled>Select Grade</option>
-                <option value="toddler_1">Toddler 1</option>
-                <option value="toddler_2">Toddler 2</option>
-                <option value="junior_infant">Junior Infant</option>
-                <option value="senior_infant">Senior Infant</option>
-                <option value="year_one">Year One</option>
-                <option value="year_two">Year Two</option>
-                <option value="year_three">Year Three</option>
-                <option value="year_four">Year Four</option>
-                <option value="year_five">Year Five</option>
+                <option value="Toddler One">Pre-Nursery</option>
+                <option value="Toddler Two">Nursery One</option>
+                <option value="Junior Infant">Nursery Two</option>
+                <option value="Senior Infant">Kindergarten</option>
+                <option value="Year One">Primary Two</option>
+                <option value="Year Two">Primary Three</option>
+                <option value="Year Three">Primary Four</option>
+                <option value="Year Four">Primary Five</option>
+                <option value="Year Five">Primary Six</option>
               </select>
             </div>
 

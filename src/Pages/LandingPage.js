@@ -29,7 +29,7 @@ const LandingPage = () => {
       <div className="bg-white shadow-lg rounded-lg p-6">
         <img
           className="w-full h-48 object-cover rounded-md mb-4"
-          src="teacher2.jpg" // Replace with your image path
+          src="feature/teacher2.jpg" // Replace with your image path
           alt="Experienced Teachers"
         /> 
         <h3 className="text-2xl font-bold mb-4">Experienced Teachers</h3>
@@ -38,16 +38,16 @@ const LandingPage = () => {
       <div className="bg-white shadow-lg rounded-lg p-6">
         <img
           className="w-full h-48 object-cover rounded-md mb-4"
-          src="career.jpg" // Replace with your image path
+          src="feature/career.jpg" // Replace with your image path
           alt="Modern Facilities"
         />
-        <h3 className="text-2xl font-bold mb-4">Co-corricular(Career Day)</h3>
+        <h3 className="text-2xl font-bold mb-4">Co-curricular(Career Day)</h3>
         <p>Our school is equipped with state-of-the-art facilities.</p>
       </div>
       <div className="bg-white shadow-lg rounded-lg p-6">
         <img
           className="w-full h-48 object-cover rounded-md mb-4"
-          src="feature3.png" // Replace with your image path
+          src="feature/feature3.png" // Replace with your image path
           alt="Holistic Education"
         />
         <h3 className="text-2xl font-bold mb-4">Holistic Education</h3>
@@ -58,7 +58,7 @@ const LandingPage = () => {
       <div className="bg-white shadow-lg rounded-lg p-6">
         <img
           className="w-full h-48 object-cover rounded-md mb-4"
-          src="feature4.png" // Replace with your image path
+          src="feature/feature4.png" // Replace with your image path
           alt="Experienced Teachers"
         /> 
         <h3 className="text-2xl font-bold mb-4">Highly Focused Pupils</h3>
@@ -67,7 +67,7 @@ const LandingPage = () => {
       <div className="bg-white shadow-lg rounded-lg p-6">
         <img
           className="w-full h-48 object-cover rounded-md mb-4"
-          src="recorder.jpg" // Replace with your image path
+          src="feature/recorder.jpg" // Replace with your image path
           alt="Modern Facilities"
         />
         <h3 className="text-2xl font-bold mb-4">The Music Show</h3>
@@ -76,7 +76,7 @@ const LandingPage = () => {
       <div className="bg-white shadow-lg rounded-lg p-6">
         <img
           className="w-full h-48 object-cover rounded-md mb-4"
-          src="sport.jpg" // Replace with your image path
+          src="feature/sport.jpg" // Replace with your image path
           alt="Holistic Education"
         />
         <h3 className="text-2xl font-bold mb-4">Sporting Activities</h3>
@@ -90,7 +90,7 @@ const LandingPage = () => {
       {/* Call to Action Section */}
       <section
   className="relative text-white text-center py-20 bg-cover bg-center"
-  style={{ backgroundImage: 'url(/heropage2.jpg)' }}
+  style={{ backgroundImage: 'url(/others/banner2.jpg)' }}
 >
   <div className="absolute inset-0 bg-black opacity-50"></div> {/* Overlay for better text visibility */}
   <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">

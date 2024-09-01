@@ -40,7 +40,7 @@ const Navbar = () => {
               <Link to="/">
                 <img
                   className="h-16 w-auto flex-shrink-0"
-                  src="./marz_logo_3.png"
+                  src="./logos/marz_logo_3.png"
                   alt="Responsive Logo"
                 />
               </Link>
@@ -112,7 +112,7 @@ const Navbar = () => {
                     </NavLink>
                     <hr />
                     <NavLink
-                      to="/brief-history"
+                      to="/brief_history"
                       className="block px-4 py-2 text-red-800 font-medium hover:text-yellow-600"
                       onClick={() => setIsAboutDropdownOpen(false)}
                     >
@@ -212,7 +212,7 @@ const Navbar = () => {
                   Careers
                 </NavLink>
                 <NavLink
-                  to="/brief-history"
+                  to="/brief_history"
                   className="text-red-800 block px-3 py-2 rounded-md text-base font-medium hover:text-yellow-600"
                   onClick={() => setIsOpen(false)}
                 >

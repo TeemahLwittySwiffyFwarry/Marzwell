@@ -31,7 +31,7 @@ const PopupNotification = ({ message, imageUrl, showDuration, hideDuration, link
   return (
     isVisible && (
       <div className="popup-notification">
-        {imageUrl && <img src={"././../advert.png"} alt="Popup" className="popup-image" />}
+        {imageUrl && <img src={"././../others/advert.png"} alt="Popup" className="popup-image" />}
         <p>{message}</p>
         <Link to={"/registration"}>
           <button

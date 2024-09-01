@@ -10,7 +10,7 @@ const Blog = () => {
         </p>
         <div className="flex justify-center">
           <img
-            src="coming_soon.jpg" // Replace with the path to your coming soon image
+            src="others/coming_soon.jpg" // Replace with the path to your coming soon image
             alt="Coming Soon"
             className=" h-auto rounded-md shadow-md"
           />
