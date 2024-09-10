@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -53,8 +53,25 @@ const Footer = () => {
     }
   };
 
+  useEffect(()=>{
+    const footer = document.getElementById('dynamic-footer');
+
+    const handleScroll=() => {
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+        footer.classList.add("fixed", "bottom-0", "left-0");
+      } else{
+        footer.classList.remove("fixed", "bottom-0", "left-0");
+      }
+    };
+    window.addEventListener("scroll",handleScroll);
+    
+    return () => {
+      window.removeEventListener("scroll",handleScroll);
+    };
+  },[]);
+
   return (
-    <footer className="bg-gray-400 text-white py-6">
+    <footer id="dynamic-footer" className="bg-gray-400 text-white py-6 fixed bottom-0 left-o w-full">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
