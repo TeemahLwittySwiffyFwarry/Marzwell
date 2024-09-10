@@ -70,7 +70,7 @@ const Footer = () => {
 
           <div className="relative">
             <div className="flex space-x-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-600">
+              <a href="https://www.facebook.com/profile.php?id=100079451780431" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-600">
                 <FaFacebookF size={30} color="#3b5998" />
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-white hover:text-blue-400">

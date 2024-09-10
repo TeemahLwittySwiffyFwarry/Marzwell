@@ -138,7 +138,7 @@ const Testimonial = () => {
 
           <div className="text-center mb-8">
             <p className="text-lg text-gray-700">
-              Here are some testimonials from parents who have experienced the impact of Marzwell.
+            Here are some testimonials from parents and alumni who have experienced the impact Marzwell School
             </p>
           </div>
 
@@ -146,6 +146,7 @@ const Testimonial = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8 text-justify">
             {testimonials
               .filter(testimonial => testimonial.approval === 'Approved') // Filter out unapproved testimonials
+              .reverse()
               .map((testimonial, index) => {
                 const isExpanded = index === expandedTestimonialIndex;
                 const textToShow = isExpanded ? testimonial.testimonial : `${testimonial.testimonial.substring(0, 200)}...`;
@@ -234,7 +235,7 @@ const Testimonial = () => {
                     <option value="Parent">Parent</option>
                     <option value="Teacher">Teacher</option>
                     <option value="Guardian">Guardian</option>
-                    <option value="Pupils">Pupils</option>
+                    <option value="Pupils">Pupil</option>
                     <option value="Alumni">Alumni</option>
                     <option value="Others">Others</option>
                   </select>

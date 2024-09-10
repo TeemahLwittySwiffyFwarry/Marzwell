@@ -24,7 +24,7 @@ const Navbar = () => {
     return (
       location.pathname === '/contact' ||
       location.pathname === '/careers' ||
-      location.pathname === '/brief-history' ||
+      location.pathname === '/brief_history' ||
       location.pathname === '/gallery' ||
       location.pathname === '/blog'
     );
@@ -73,7 +73,7 @@ const Navbar = () => {
                 Portal
               </NavLink>
               <NavLink
-                to="/lms"
+                to="https://marzwellschools.com/lms/login/index.php"
                 className={({ isActive }) =>
                   isActive
                     ? 'text-yellow-600 font-extrabold'
@@ -177,7 +177,7 @@ const Navbar = () => {
               Portal
             </NavLink>
             <NavLink
-              to="/lms"
+              to="https://marzwellschools.com/lms/login/index.php"
               className={({ isActive }) =>
                 isActive
                   ? 'text-yellow-600 font-extrabold'

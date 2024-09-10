@@ -4,19 +4,20 @@
   right: 20px; /* Distance from the right side of the viewport */
   background-color: #eca8a8; /* Red background */
   color: rgb(18, 184, 239);
-  padding: 20px;
+  padding: 2px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000; /* Ensures the popup appears above other content */
   transition: opacity 0.5s ease;
+  
   }
   
   
   .popup-notification img {
-    height: 200px;
+    height: auto;
     width: 200px;
-    margin-right: 10px;
     vertical-align: middle;
+    object-fit: cover;
   }
   
   .popup-notification p {

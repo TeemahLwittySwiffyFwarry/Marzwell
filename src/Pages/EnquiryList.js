@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AdminDashboard from './AdminDashboard';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate, Link } from 'react-router-dom';
@@ -69,8 +70,10 @@ const EnquiryList = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6 mt-20">
+      <AdminDashboard/>
       <div className="w-full max-w-5xl bg-white shadow-lg rounded-lg p-8">
         <h1 className="text-2xl font-bold mb-4">Enquiry List</h1>
+        <div className="overflow-auto rounded-lg shadow">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr>
@@ -85,7 +88,7 @@ const EnquiryList = () => {
             </tr>
           </thead>
           <tbody>
-            {enquiries.map((enquiry, index) => (
+            {enquiries.slice().reverse().map((enquiry, index) => (
               <tr key={enquiry.id}>
                 <td className="py-2 px-4 border-b">{index + 1}</td> {/* S/N column */}
                 <td className="py-2 px-4 border-b">{enquiry.parent_name}</td>
@@ -113,6 +116,7 @@ const EnquiryList = () => {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );

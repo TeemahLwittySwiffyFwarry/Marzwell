@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import AdminDashboard from './AdminDashboard';
 import { useNavigate, Link } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';
 import { FaRegEdit } from 'react-icons/fa';
@@ -85,9 +86,32 @@ const TestimonialList = () => {
   if (error) return <div>{error}</div>;
 
   return (
+    <div>
+       
+
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6 mt-20">
+
       <div className="w-full max-w-6xl bg-white shadow-lg rounded-lg p-8">
-        <h1 className="text-2xl font-bold mb-4">Testimonial List</h1>
+        <h1 className="text-2xl font-bold mb-4 text-center">Testimonial List</h1>
+        <nav className="bg-cyan-400 p-4 flex items-center rounded-lg shadow-lg my-4 ">
+  <div className="flex flex-grow justify-around">
+    <Link to="/inbox" className="text-gray-800 hover:text-red-400 font-semibold transition-colors duration-300">
+      Inbox
+    </Link>
+    <Link to="/blog" className="text-white hover:text-gray-400 font-semibold transition-colors duration-300">
+      Blog
+    </Link>
+    <Link to="/enquiry_list" className="text-white hover:text-gray-400 font-semibold transition-colors duration-300">
+      Edit Enquiry
+    </Link>
+    <Link to="/testimonial_list" className="text-white hover:text-gray-400 font-semibold transition-colors duration-300">
+      Edit Testimonial
+    </Link>
+  </div>
+</nav>
+
+
+        <div className="overflow-auto rounded-lg shadow">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr className="bg-gray-200">
@@ -103,7 +127,7 @@ const TestimonialList = () => {
             </tr>
           </thead>
           <tbody>
-            {testimonials.map((testimonial, index) => (
+            {testimonials.slice().reverse().map((testimonial, index) => (
               <tr key={testimonial.id} className="border-b hover:bg-gray-100">
                 <td className="py-2 px-4">{index + 1}</td>
                 <td className="py-2 px-4 truncate">{testimonial.name}</td>
@@ -158,7 +182,9 @@ const TestimonialList = () => {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
+    </div>
     </div>
   );
 };
