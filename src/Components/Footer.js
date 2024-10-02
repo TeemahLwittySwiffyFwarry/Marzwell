@@ -30,7 +30,7 @@ const Footer = () => {
 
       if (response.status === 200) {
         const { refresh, access } = response.data;
-        
+
         // Store tokens in local storage
         localStorage.setItem('refresh_token', refresh);
         localStorage.setItem('access_token', access);
@@ -53,25 +53,26 @@ const Footer = () => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     const footer = document.getElementById('dynamic-footer');
 
-    const handleScroll=() => {
-      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight){
+    const handleScroll = () => {
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
         footer.classList.add("fixed", "bottom-0", "left-0");
-      } else{
+      } else {
         footer.classList.remove("fixed", "bottom-0", "left-0");
       }
     };
-    window.addEventListener("scroll",handleScroll);
-    
+
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
-      window.removeEventListener("scroll",handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
-  },[]);
+  }, []);
 
   return (
-    <footer id="dynamic-footer" className="bg-gray-400 text-white py-6 fixed bottom-0 left-o w-full">
+    <footer id="dynamic-footer" className="bg-gray-400 text-white py-6 bottom-0 left-0 w-full">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-4 md:mb-0">
@@ -121,7 +122,7 @@ const Footer = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-cyan-200 bg-opacity-50">
           <div className="bg-cyan-200 p-8 rounded-lg shadow-xl max-w-md w-full">
             <img src="/logos/marz_logo_3.png" className="" alt="" />
-            
+
             <form onSubmit={handleLogin}>
               <div className="mb-4">
                 <label htmlFor="username" className="block text-gray-700 font-semibold">Username</label>

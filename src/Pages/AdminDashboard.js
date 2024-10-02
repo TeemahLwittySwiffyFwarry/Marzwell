@@ -22,7 +22,7 @@ const AdminDashboard = () => {
 
           {/* Add Blog Card */}
           <Link
-            to="/add-blog"
+            to="/blog_list"
             className="bg-cyan-200 p-6 rounded-lg shadow-lg flex items-center space-x-4 hover:bg-cyan-300 transition-transform transform hover:scale-105"
           >
             <FaPen size={36} className="text-green-600" />

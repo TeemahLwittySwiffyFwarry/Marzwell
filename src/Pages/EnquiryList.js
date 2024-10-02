@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import AdminDashboard from './AdminDashboard';
+import AdminNavbar from '../Components/AdminNavbar';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate, Link } from 'react-router-dom';
@@ -69,12 +69,13 @@ const EnquiryList = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6 mt-20">
-      <AdminDashboard/>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6 mt-20 mb-5">
+      
       <div className="w-full max-w-5xl bg-white shadow-lg rounded-lg p-8">
         <h1 className="text-2xl font-bold mb-4">Enquiry List</h1>
+        <AdminNavbar/>
         <div className="overflow-auto rounded-lg shadow">
-        <table className="min-w-full bg-white border border-gray-200">
+        <table className="min-w-full bg-white border border-gray-200 mb-20">
           <thead>
             <tr>
               <th className="py-2 px-4 border-b">S/N</th>

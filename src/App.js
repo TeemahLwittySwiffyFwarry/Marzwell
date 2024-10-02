@@ -17,10 +17,15 @@ import EditEnquiry from './Pages/EditEnquiry';
 import EnquiryList from './Pages/EnquiryList';
 import EditTestimonialList from './Pages/EditTestimonialList';
 import TestimonialList from './Pages/TestimonialList';
+import AddBlogPost from './Pages/AddBlogPost';
+import BlogList from './Pages/BlogList';
+import EditBlogPost from './Pages/EditBlogPost';
 
 const App = () => {
   return (
-    <Router>
+    <div className="min-h-screen flex flex-col">
+      <main className="flex-grow">
+      <Router>
       <Navbar />
       <Routes>
         <Route path="/" element={<LandingPage />} />
@@ -38,9 +43,14 @@ const App = () => {
         <Route path="/edit_enquiry/:id" element={<EditEnquiry />} /> {/* Updated route */}
         <Route path="/testimonial_list" element={<TestimonialList />} />
         <Route path="/edit_testimonial_list/:testimonialId" element={<EditTestimonialList />} />
+        <Route path="/add_blog_post" element={<AddBlogPost />} />
+        <Route path="/blog_list" element={<BlogList />} />
+        <Route path="/edit_blog_post/:slug" element={<EditBlogPost />} />
       </Routes>
       <Footer />
     </Router>
+      </main>
+    </div>
   );
 };
 

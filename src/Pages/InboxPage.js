@@ -3,6 +3,8 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { FaTrashAlt } from 'react-icons/fa';
 
+import AdminNavbar from '../Components/AdminNavbar';
+
 const InboxPage = () => {
   const [messages, setMessages] = useState([]);
 
@@ -55,6 +57,7 @@ const InboxPage = () => {
     <div className="bg-gray-100 min-h-screen py-10 mt-20 container">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-3xl font-bold text-center text-blue-800 mb-6">Inbox</h1>
+        <AdminNavbar/>
         <div className="bg-white shadow-md rounded-lg p-6">
           {messages.length === 0 ? (
             <p className="text-center text-gray-500">No messages to display</p>
